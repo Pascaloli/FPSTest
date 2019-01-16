@@ -26,7 +26,7 @@ public class Main extends JFrame {
 
   public void start() {
     instance = this;
-    this.setTitle("FPS Test - Made by ");
+    this.setTitle("FPS Test - Made by Pascaloli");
     JPanel panel = getContent();
     this.add(panel);
     this.setSize(this.width + 13, this.height);
