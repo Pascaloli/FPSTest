@@ -20,7 +20,7 @@ public class CircleObject extends JComponent {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g.create();
     g.setColor(Color.black);
-    g2d.draw(new Ellipse2D.Double(0,  this.ease.ease, radius, radius));
+    g2d.draw(new Ellipse2D.Double(0, this.ease.ease, radius, radius));
   }
 }
 

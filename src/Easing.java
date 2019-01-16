@@ -1,6 +1,3 @@
-
-
-
 /**
  * <p>
  * The Easing class holds a set of general-purpose motion tweening functions by Robert Penner. This

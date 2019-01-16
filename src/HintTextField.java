@@ -10,10 +10,10 @@ import javax.swing.SwingUtilities;
 public class HintTextField extends JTextField implements FocusListener {
 
   private HintTextField instance;
-  private final String hint;
+  private String hint;
   private boolean showingHint;
 
-  public HintTextField(final String hint) {
+  public HintTextField(String hint) {
     super(hint);
     this.hint = hint;
     this.showingHint = true;
