@@ -2,10 +2,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 public class HintTextField extends JTextField implements FocusListener {
 
@@ -20,6 +17,7 @@ public class HintTextField extends JTextField implements FocusListener {
     this.setText(hint);
     instance = this;
     this.addKeyListener(new KeyAdapter() {
+      @Override
       public void keyTyped(KeyEvent e) {
         if (!Character.isDigit(e.getKeyChar()) || instance.getText().length() >= 3
             || (instance.getText().length() == 0 && e.getKeyChar() == '0')) {

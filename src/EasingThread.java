@@ -1,5 +1,4 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+
 
 public class EasingThread extends Thread {
 
@@ -16,8 +15,7 @@ public class EasingThread extends Thread {
     while (true) {
       Easing e = Easing.CUBIC_IN_OUT;
       float ease = e.ease((System.currentTimeMillis() - time), 0, 300, 20 * 60);
-      if ((System.currentTimeMillis() - time) > 20 * 60 - 200) {
-        ease = 300;
+      if ((System.currentTimeMillis() - time) > 20 * 60) {
         time = System.currentTimeMillis();
         flip = !flip;
       }

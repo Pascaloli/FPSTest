@@ -1,16 +1,7 @@
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.Timer;
 
 public class Main extends JFrame {
 
@@ -58,7 +49,7 @@ public class Main extends JFrame {
       circles[i] = new CircleObject(xPos, textFieldWidth, ease);
       circles[i].setBounds(xPos, 50, 100, this.height);
       panel.add(circles[i]);
-      
+
       fps.set(fps.get() * 2);
     });
 
@@ -67,20 +58,18 @@ public class Main extends JFrame {
 
   public void startTimer() {
     this.ease.start();
-    new Thread(new Runnable() {
-      @Override
-      public void run() {
-        long[] times = new long[amount];
-        IntStream.range(0, amount).parallel().forEach(i -> times[i] = System.currentTimeMillis());
-        while (true) {
-          IntStream.range(0, amount).parallel().forEach(i -> {
-            if (System.currentTimeMillis() - times[i] >= 1000 / Integer
-                .valueOf(textFields[i].getText().isEmpty() ? "1" : textFields[i].getText())) {
-              circles[i].repaint();
-              times[i] = System.currentTimeMillis();
-            }
-          });
-        }
+    new Thread(() -> {
+      long[] times = new long[amount];
+      IntStream.range(0, amount).forEach(i1 -> times[i1] = System.currentTimeMillis());
+      while (true) {
+        IntStream.range(0, amount).parallel().forEach(i2 -> {
+          String fpsRaw = textFields[i2].getText();
+          int fps = fpsRaw.isEmpty() ? 1 : Integer.valueOf(fpsRaw);
+          if (System.currentTimeMillis() - times[i2] >= 1000 / fps) {
+            circles[i2].repaint();
+            times[i2] = System.currentTimeMillis();
+          }
+        });
       }
     }).start();
   }

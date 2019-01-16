@@ -16,6 +16,7 @@ public class CircleObject extends JComponent {
     this.ease = ease;
   }
 
+  @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g.create();
