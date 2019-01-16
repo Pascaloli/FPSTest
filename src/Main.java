@@ -50,7 +50,6 @@ public class Main extends JFrame {
 
     AtomicInteger fps = new AtomicInteger(15);
     IntStream.range(0, amount).distinct().forEach(i -> {
-      System.out.println("beginning: " + fps.get());
       textFields[i] = new HintTextField(String.valueOf(fps.get()));
       int xPos = calculatePosition(amount, i + 1, textFieldWidth);
       textFields[i].setBounds(xPos, textFieldY, textFieldWidth, textFieldHeight);
@@ -61,7 +60,6 @@ public class Main extends JFrame {
       panel.add(circles[i]);
       
       fps.set(fps.get() * 2);
-      System.out.println("end: " + fps.get());
     });
 
     return panel;
@@ -74,7 +72,6 @@ public class Main extends JFrame {
       public void run() {
         long[] times = new long[amount];
         IntStream.range(0, amount).parallel().forEach(i -> times[i] = System.currentTimeMillis());
-        System.out.println(times[0] + " " + times[1] + " " + times[2] + " " + times[3]);
         while (true) {
           IntStream.range(0, amount).parallel().forEach(i -> {
             if (System.currentTimeMillis() - times[i] >= 1000 / Integer
